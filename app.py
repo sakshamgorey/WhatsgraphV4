@@ -11,6 +11,7 @@ import scipy
 from scipy.sparse import csr_matrix
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
+from datetime import datetime
 from processor.transformers.chat_eda import WhatsAppProcess, sorted_authors_df,\
     statistics, process_data, WhatsAppConfig
 from processor.graphs.charts import pie_display_emojis, time_series_plot,\
@@ -19,7 +20,6 @@ from processor.graphs.charts import pie_display_emojis, time_series_plot,\
     sentiment_analysis, most_suitable_day, most_suitable_hour,word_frequency_count,\
     user_activity_over_time
 
-from datetime import datetime
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(page_title="Whatsgraph💬")

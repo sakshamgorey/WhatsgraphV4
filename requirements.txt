@@ -6,4 +6,5 @@ matplotlib==3.3.4
 emoji==1.6.3
 plotly==5.6.0
 textblob==0.17.1
+scipy
 pyyaml
