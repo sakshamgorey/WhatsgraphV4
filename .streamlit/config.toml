@@ -1,0 +1,8 @@
+[theme]
+
+# Font family for all text in the app, except code blocks
+# Accepted values (serif | sans serif | monospace) 
+# Default: "sans serif"
+base="light"
+font = "monospace"
+primaryColor="#48ea08"

@@ -1,0 +1,26 @@
+whatsapp:
+  url_pattern: '(https?://\S+)'
+  weeks: {
+            0: 'Monday',
+            1: 'Tuesday',
+            2: 'Wednesday',
+            3: 'Thrusday',
+            4: 'Friday',
+            5: 'Saturday',
+            6: 'Sunday'
+        }
+        
+  regex_list: [
+   '(\d+\-\d+\-\d+, \d+:\d+ [a-zA-Z].[a-zA-Z].*) - (.*?): (.*)',
+   '(\d+/\d+/\d+, \d+:\d+\s*[AP]M) - (.*?): (.*)',
+   '(\[\d+/\d+/\d+, \d+:\d+:\d+ [A-Z][A-Z]\]) (.*?): (.*)',
+   '(\d+/\d+/\d+, \d+:\d+\s*[AP]M) - (.*?): (.*)'
+]
+  # the above code has been an headache
+
+  ignore: [
+            'Missed video call', 'Missed group video call',
+            'Missed voice call', '<Media omitted>',
+            'This message was deleted', 'image omitted',
+            'video omitted', 'You deleted this message',
+            'sticker omitted','audio omitted','document omitted']
