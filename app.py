@@ -220,7 +220,7 @@ def main():
     st.text('''
     version 4 of Whatsgraph contains graphing functions and sentiment analysis.
     In version 5 we would like to do toxicity analysis and improve on the graphing 
-    capabilities,particularly on iOS devices. 
+    capabilities. 
     
     Additionally, we plan to add more machine learning
     features to enhance data analysis. 
