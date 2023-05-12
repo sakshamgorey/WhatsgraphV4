@@ -7,6 +7,6 @@ emoji==1.6.3
 plotly==5.6.0
 textblob==0.17.1
 altair
-click==7.0
+click==7.1.2
 scipy
 pyyaml
