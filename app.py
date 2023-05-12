@@ -76,6 +76,7 @@ def display_statistics(stats):
 def chart_display(data_frame):
     st.markdown("----")
     st.header("Over Time Analysis")
+    st.warning("Warning: This visualization is optimized for Xiaomi device data and may not work as expected for other datasets.")
     st.write(time_series_plot(data_frame))
 
     st.markdown("----")
@@ -170,7 +171,8 @@ def file_process(data, config):
     st.pyplot(sentiment_analysis(cloud_df))
 
     st.header("Experimental Features")
-    st.subheader("These features are still being developed or tested.")
+    st.warning("Warning: These features are not fully implemented and may cause errors or break the app. Use at your own risk.")
+    
     st.markdown("----")
     
     with st.expander("User Activity Over Time"):
@@ -216,10 +218,16 @@ def main():
         file_process(data, config)
     st.header("Whatsgraph💬 V4.0 log")
     st.text('''
-        version 4 of Whatsgraph contains graphing functions and sentiment analysis
-        In version 5 we would like to do toxicity analysis
-        and improve on the graphing capabilities, particularly on iOS devices. Additionally,
-        we plan to add more machine learning features to enhance data analysis.
+    version 4 of Whatsgraph contains graphing functions and sentiment analysis.
+    In version 5 we would like to do toxicity analysis and improve on the graphing 
+    capabilities,particularly on iOS devices. 
+    
+    Additionally, we plan to add more machine learning
+    features to enhance data analysis. 
+    
+    We want to optimize support for other devices other than Xiaomi,
+    so please provide us with feedback on any problems you face while 
+    using Whatsgraph on different devices.
     ''')
     st.text(''' 
     Major Project
