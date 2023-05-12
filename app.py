@@ -121,7 +121,7 @@ def file_process(data, config):
     display_statistics(stats)
 
     cloud_df = whatsapp.cloud_data(raw_df)
-    st.header("Frequently used words")
+    st.header("Individual Stats")
     sorted_authors = sorted_authors_df(cloud_df)
     select_author = []
     select_author.append(st.selectbox('', sorted_authors))
@@ -215,10 +215,11 @@ def main():
         data = uploaded_file.getvalue().decode("utf-8")
         file_process(data, config)
     st.header("Whatsgraph💬 V4.0 log")
-    st.text(''' 
-    version 4 of Whatsgraph contains basic graphing functions and sentiment analysis
-    In version 5 we would like to do toxicity analysis
-    and improve on the graphing capabilities 
+    st.text('''
+        version 4 of Whatsgraph contains graphing functions and sentiment analysis
+        In version 5 we would like to do toxicity analysis
+        and improve on the graphing capabilities, particularly on iOS devices. Additionally,
+        we plan to add more machine learning features to enhance data analysis.
     ''')
     st.text(''' 
     Major Project
