@@ -18,7 +18,7 @@ from processor.graphs.charts import pie_display_emojis, time_series_plot,\
     most_active_member, most_active_day,\
     max_words_used, top_media_contributor, who_shared_links,\
     sentiment_analysis, most_suitable_day, most_suitable_hour,word_frequency_count,\
-    user_activity_over_time
+    user_activity_over_time,sentiment_analysis_ind
 
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -117,35 +117,45 @@ def file_process(data, config):
     raw_df = process_data(message)
     data_frame = whatsapp.get_dataframe(raw_df)
     stats = statistics(raw_df, data_frame)
-
+    
     st.markdown("----")
     display_statistics(stats)
-
+    
     cloud_df = whatsapp.cloud_data(raw_df)
+    
+    st.header("Sentment Analysis")
+    col4, col5, col6 = st.columns(3)
+    
+
+    sentiment_counts = sentiment_analysis_ind(cloud_df) 
+    col4.metric("Positive Messages", sentiment_counts['pos_count'])
+    col5.metric("Negative Messages", sentiment_counts['neg_count'])
+    col6.metric("Neutral Messages", sentiment_counts['neu_count'])
+            
+    
     st.header("Individual Stats")
     sorted_authors = sorted_authors_df(cloud_df)
     select_author = []
     select_author.append(st.selectbox('', sorted_authors))
     dummy_df = cloud_df[cloud_df['name'] == select_author[0]]
     text = " ".join(review for review in dummy_df.message)
+    
+    col1, col2, col3 = st.columns(3)
+    
+    # First row metrics
+    col1.metric("Total Messages", dummy_df[dummy_df['name'] == select_author[0]].shape[0])
+    col2.metric("Emoji Count", sum(data_frame[data_frame.name.str.contains(select_author[0][-5:])].emojis.str.len()))
+    col3.metric("Link Shared", int(data_frame[data_frame.name == select_author[0]].urlcount.sum()))
+    
 
-    col1, col2, col3, col4, col5 = st.columns(5)
-
-    col1.metric(
-        "Total Messages",
-        dummy_df[dummy_df['name'] == select_author[0]].shape[0])
-    col2.metric(
-        "Emoji Count", sum(
-            data_frame[data_frame.name.str.contains(
-                select_author[0][-5:])].emojis.str.len()))
-    col3.metric("Link Shared", int(
-        data_frame[data_frame.name == select_author[0]].urlcount.sum()))
-    col4.metric("Total Words", int(
-        data_frame[data_frame.name == select_author[0]].word_count.sum()))
-    user_df = data_frame[data_frame.name.str.contains(
-        select_author[0][-5:])]
+    col7, col8 = st.columns(2)
+    col7.metric("Total Words", int(data_frame[data_frame.name == select_author[0]].word_count.sum()))
+    user_df = data_frame[data_frame.name.str.contains(select_author[0][-5:])]
     average = round(npsum(user_df.word_count)/user_df.shape[0], 2)
-    col5.metric("Average words/Message", average)
+    col8.metric("Average words/Message", average)
+    
+   
+    
 
     if len(text) != 0:
         generate_word_cloud(

@@ -232,6 +232,21 @@ def user_activity_over_time(data_frame: pd.DataFrame):
     ax.legend()
     
     return fig
-
+    
+def sentiment_analysis_ind(cloud_df: pd.DataFrame):
+    cloud_df['sentiment'] = cloud_df.message.apply(
+        lambda text: TextBlob(text).sentiment.polarity)
+    cloud_df['sentiment_type'] = cloud_df.sentiment.apply(
+        lambda score: 'positive' if score > 0 else 'negative' if score < 0 else 'neutral')
+    
+    # count number of positive, negative, and neutral messages
+    pos_count = cloud_df[cloud_df['sentiment_type'] == 'positive'].shape[0]
+    neg_count = cloud_df[cloud_df['sentiment_type'] == 'negative'].shape[0]
+    neu_count = cloud_df[cloud_df['sentiment_type'] == 'neutral'].shape[0]
+    
+    # Return counts as a dictionary
+    return {'pos_count': pos_count,
+            'neg_count': neg_count,
+            'neu_count': neu_count}
 
 
